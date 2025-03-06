@@ -20,3 +20,5 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Build OCI container
+        run: DOCKER_BUILDKIT=1 docker build --build-arg BUILD_FA="0" --build-arg FX_GFX_ARCHS="gfx1100" -f Dockerfile.rocm -t vllm-rocm .
