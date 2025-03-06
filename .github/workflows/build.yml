@@ -46,9 +46,9 @@ jobs:
         with:
           file: Dockerfile.rocm
           push: true
-          build-args:
-            - BASE_IMAGE="rocm/vllm-dev:navi_base"
-            - BUILD_FA="0"
-            - FX_GFX_ARCHS="gfx1100"
+          build-args: |
+            BASE_IMAGE="rocm/vllm-dev:navi_base"
+            BUILD_FA="0"
+            FX_GFX_ARCHS="gfx1100"
           tags: ghcr.io/michaelmnemonic/vllm:latest
         
