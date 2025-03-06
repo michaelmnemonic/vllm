@@ -44,7 +44,7 @@ jobs:
       - name: Build OCI container
         uses: docker/build-push-action@v6
         with:
-          file: Dockerfile.rocm
+          file: ./Dockerfile.rocm
           push: true
           build-args: |
             BUILD_FA=0
