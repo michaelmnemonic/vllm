@@ -35,5 +35,20 @@ jobs:
           swap-storage: true
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: https://ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build OCI container
-        run: DOCKER_BUILDKIT=1 docker build --build-arg BASE_IMAGE="rocm/vllm-dev:navi_base" --build-arg BUILD_FA="0" --build-arg FX_GFX_ARCHS="gfx1100" -f Dockerfile.rocm -t vllm-rocm .
+        uses: docker/build-push-action@v6
+        with:
+          file: Dockerfile.rocm
+          push: true
+          build-args:
+            - BASE_IMAGE="rocm/vllm-dev:navi_base"
+            - BUILD_FA="0"
+            - FX_GFX_ARCHS="gfx1100"
+          tags: ghcr.io/michaelmnemonic/vllm:latest
+        
